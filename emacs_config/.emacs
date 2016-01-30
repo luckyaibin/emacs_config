@@ -1,12 +1,33 @@
-(setenv "HOME" "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/emacs_directory")
-(setenv "PATH" "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/emacs_directory")
-
-;;打开Steve Purcell emacs 配置
-(add-to-list 'load-path "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/emacs_directory/emacs.d")
-;;(require 'init)
-;;(load-file "~/.emacs.d/init.el")
+(setenv "HOME" "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_directory")
+(setenv "PATH" "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_directory")
+(setenv "LANG" "zh_CN.UTF-8")
 
 
+
+
+;;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;一些通用配置
+(setq default-directory "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_directory")
+(setq inhibit-startup-message t) ;关闭启动画面
+(setq column-number-mode t) ;显示列号
+(global-linum-mode t)
+;;; 括号匹配时显示另一个括号而不是跳到另一个括号
+(show-paren-mode t)
+(setq show-paren-style 'parentheses)
+
+;;标题显示文件全路径名和大小和mode
+;;(setq frame-title-format "%b %I") 
+;;显示文件大小,mode,以及文件全路径
+(setq frame-title-format
+      '("(%I)(%m)%S" (buffer-file-name "%f"
+                   (dired-directory dired-directory "%b"))))
+
+(auto-image-file-mode t) ;让Emacs可以直接打开、显示图片
+(fset 'yes-or-no-p 'y-or-n-p) ;以Y/N代表yes/no
+(setq auto-save-default nil) ;不生成名为#filename#的临时文件
+(setq x-select-enable-clipboard t) ;支持和外部程序的拷贝
+(global-font-lock-mode t) ;打开语法高亮
+ 
 ;;每次退出emacs自动保存状态，下次打开自动恢复
 (desktop-save-mode 1)
 
@@ -16,23 +37,21 @@
   (revert-buffer t (not (buffer-modified-p)) t))      
 (global-set-key [(control f5)] 'refresh-file)
 
-
 ;;set the default file path
-(setq default-directory "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/emacs_directory")
 
-(message "11111 load config successfully")
+
+(message "robin load config successfully")
 (load-file "~/../emacs_config/face-setting.el")
-
 (message "load config successfully")
 
 ;;highlight-parentheses
 (load-file "~/../emacs_config/highlight-parentheses.el")
 (highlight-parentheses-mode t)
 
-
+;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;w3m配置项（用于上网）
-(add-to-list 'load-path "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/thirdparty/windows_emacs_w3m/w3m-lisp") ;;w3m所需要的lisp文件，所在路径
-(add-to-list 'exec-path "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/thirdparty/windows_emacs_w3m/w3m") ;;指定w3m可执行程序，所在的执行路径
+(add-to-list 'load-path "C:/softwares/emacs-24.5-bin-i686-mingw32/thirdparty/windows_emacs_w3m/w3m-lisp") ;;w3m所需要的lisp文件，所在路径
+(add-to-list 'exec-path "C:/softwares/emacs-24.5-bin-i686-mingw32/thirdparty/windows_emacs_w3m/w3m") ;;指定w3m可执行程序，所在的执行路径
 (require 'w3m-load)
 (setq w3m-use-favicon nil)
 (setq w3m-command-arguments '("-cookie" "-F"))
@@ -47,10 +66,10 @@
 (setq w3m-default-display-inline-image t) 
 (setq w3m-default-toggle-inline-images t)
 
-(setenv "LANG" "zh_CN.UTF-8")
 
+;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;tabbar工具,在最上面以页卡方式显示当前打开的所有文件
-(add-to-list 'load-path "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/emacs_config/")
+(add-to-list 'load-path "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/")
 (require 'tabbar)
 (tabbar-mode 1)
 (global-set-key [(meta k)] 'tabbar-forward)
@@ -79,14 +98,13 @@
                     :box '(:line-width 3 :color "gray"))
 
 ;; USEFUL: set tabbar's separator gap
-(custom-set-variables '(tabbar-separator (quote (1.5))))
+;;(custom-set-variables '(tabbar-separator (quote (1.5))))
 
 
+;;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;;helm-swoop 多文件查找
-;; Example config
-;; ----------------------------------------------------------------
 ;; ;; helm from https://github.com/emacs-helm/helm
-(add-to-list 'load-path "C:/softwares/emacs-24.4-bin-i686-pc-mingw32/emacs_config/helm")
+(add-to-list 'load-path "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/helm")
 (require 'helm)
 
 ;; ;; Locate the helm-swoop folder to your path
@@ -125,21 +143,26 @@
 (setq helm-swoop-use-line-number-face t)
 ;;--------------------------------------------------------------------------
 
-;;;一些通用配置
-(setq inhibit-startup-message t) ;关闭启动画面
-(setq column-number-mode t) ;显示列号
-(global-linum-mode t)
-;;; 括号匹配时显示另一个括号而不是跳到另一个括号
-(show-paren-mode t)
-(setq show-paren-style 'parentheses)
-(setq frame-title-format "%b %I") ;显示文件名和大小
 
-(auto-image-file-mode t) ;让Emacs可以直接打开、显示图片
-(fset 'yes-or-no-p 'y-or-n-p) ;以Y/N代表yes/no
-(setq auto-save-default nil) ;不生成名为#filename#的临时文件
-(setq x-select-enable-clipboard t) ;支持和外部程序的拷贝
-(global-font-lock-mode t) ;打开语法高亮
-
-
-
+;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;自定义设置
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ ;;'(gnutls-trustfiles "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/cacert.pem")
+;; '(trustfiles '("C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/cacert.pem" "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/ca-bundle.crt"))
+ 
+ '(debug-on-error t) 
+ '(gnutls-log-level 2 t)
+ '(gnutls-trustfiles
+   (quote
+    ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/cacert.pem" "C:/softwares/emacs-24.5-bin-i686-mingw32/emacs_config/ca-bundle.crt")))
+	
+ '(tabbar-separator (quote (1.5))))
+ 
+;;;;;;;;;;;;;;;;;;加载其他人的配置(https://github.com/redguardtoo/emacs.d）
+;;(require 'init)
+(load-file "~/.emacs.d/init.el")
 
